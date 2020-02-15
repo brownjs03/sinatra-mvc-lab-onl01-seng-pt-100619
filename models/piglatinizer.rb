@@ -4,20 +4,22 @@ class PigLatinizer
      
   end 
   
-  def piglatinize(word)
-    vowels = ["a", "e", "i", "o", "u"]
-    first_letter = word[0] 
-    if vowels.include?(first_letter)
-      "#{word}" + "way"
-    else 
-      consonants = [] 
-      consonants << word[0] 
-      if !vowels.include?(word[1])
-        consonants << word[1]
-      end 
-    end
-    "#{word[consonants.length..-1]}" + consonants.join + "ay"
+  def consonant
+    
   end 
+  
+  def piglatinize_word(word)
+    if !consonant?(word[0])
+      word = word + "w"
+    elsif consonant?(word[0]) && consonant?(word[1]) && consonant?(word[2])
+      word = word.slice(3..-1) + word.slice(0,3)
+    elsif consonant?(word[0]) && consonant?(word[1])
+      word = word.slice(2..-1) + word.slice(0,2)
+    else
+      word = word.slice(1..-1) + word.slice(0)
+    end
+    word << "ay"
+  end
   
   
 end 
